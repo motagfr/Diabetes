@@ -26,7 +26,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
-df = pd.read_csv("C:\\diabetes_012_health_indicators_BRFSS2015.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/imsalione/Diabete/main/src/diabetes.csv")
 df
 df.shape
 df.isnull().sum()
