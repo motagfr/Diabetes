@@ -1,3 +1,4 @@
+import os
 from collections import Counter
 
 import matplotlib.pyplot as plt
@@ -26,7 +27,10 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
-df = pd.read_csv("https://raw.githubusercontent.com/imsalione/Diabete/main/src/diabetes.csv")
+relative_path = "src\diabetes.csv"
+absolute_path = os.path.join(os.getcwd(), relative_path)
+with open(absolute_path, "r") as file:
+    df = pd.read_csv(absolute_path)
 df
 df.shape
 df.isnull().sum()
@@ -190,7 +194,7 @@ print(train_score)
 print(test_score)
 
 #############
-#How to determine n_estimators
+# How to determine n_estimators
 
 from sklearn.model_selection import cross_val_score
 
@@ -200,14 +204,14 @@ train_scores = []
 
 for n_estimators in n_estimators_range:
     rf = RandomForestClassifier(n_estimators=n_estimators, random_state=42)
-    train_score = np.mean(cross_val_score(rf, X, y, cv=5, scoring='accuracy'))
+    train_score = np.mean(cross_val_score(rf, X, y, cv=5, scoring="accuracy"))
     train_scores.append(train_score)
 
 
-plt.plot(n_estimators_range, train_scores, label='Training score')
-plt.xlabel('Number of trees')
-plt.ylabel('Accuracy')
-plt.title('Training performance as a function of n_estimators')
+plt.plot(n_estimators_range, train_scores, label="Training score")
+plt.xlabel("Number of trees")
+plt.ylabel("Accuracy")
+plt.title("Training performance as a function of n_estimators")
 plt.legend()
 plt.show()
 ######################################
