@@ -189,6 +189,28 @@ test_score = rf.score(X_test, y_test)
 print(train_score)
 print(test_score)
 
+#############
+#How to determine n_estimators
+
+from sklearn.model_selection import cross_val_score
+
+n_estimators_range = np.arange(1, 111, 10)
+
+train_scores = []
+
+for n_estimators in n_estimators_range:
+    rf = RandomForestClassifier(n_estimators=n_estimators, random_state=42)
+    train_score = np.mean(cross_val_score(rf, X, y, cv=5, scoring='accuracy'))
+    train_scores.append(train_score)
+
+
+plt.plot(n_estimators_range, train_scores, label='Training score')
+plt.xlabel('Number of trees')
+plt.ylabel('Accuracy')
+plt.title('Training performance as a function of n_estimators')
+plt.legend()
+plt.show()
+######################################
 # Assuming you have trained a tree-based model called 'model'
 
 # Get feature importances
