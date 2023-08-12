@@ -251,6 +251,32 @@ sorted_feature_coefficients = sorted(
 for feature, coefficient in sorted_feature_coefficients:
     print(f"Feature: {feature}, Coefficient: {coefficient}")
 
+#############################
+# Instantiate the SGDClassifier
+sgd = SGDClassifier()
+
+param_dist = {
+    'loss':['log', 'modified_huber'],
+    'penalty': ['l1', 'l2'],
+    'alpha': np.random.uniform(0, 0.01, 5),
+    'learning_rate': ['constant', 'optimal'],
+    'eta0': np.random.uniform(0, 0.1, 5),
+    'max_iter': [100,200,300]
+}
+random_search = RandomizedSearchCV(
+    sgd,
+    param_distributions=param_dist,
+    n_iter=10,
+    cv=5,
+    random_state=42
+)
+
+# Fit the random search to your data
+random_search.fit(X_train, y_train)
+
+# Retrieve the best parameters and model
+best_params = random_search.best_params_
+best_model = random_search.best_estimator_
 
 ##################################
 rf = RandomForestClassifier(random_state=0, class_weight="balanced")
