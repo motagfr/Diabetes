@@ -1,2 +1,2 @@
 # Diabete
- 📌 Important: add font's (in src folder) to show better the markdown's
+ 📌 Important: install the font's (in src folder) in your os to show better the markdown's
